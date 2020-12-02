@@ -14,7 +14,7 @@ namespace _5_print_comb
                 }
                 else
                 {
-                    Console.Write("{0}", i);
+                    Console.Write("{0:00}", i);
                 }
             }
         }
