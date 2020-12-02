@@ -7,7 +7,7 @@
 
 <p align="center">
   <img src="https://pluralsight.imgix.net/paths/path-icons/csharp-e7b8fcd4ce.png" width="80" height="80">
-  <h3 align="center">0x00-csharp-hello_world</h3>
+  <h3 align="center">0x01-csharp-ifelse_loops_methods</h3>
 
   <p align="center">
         <em>--</em>
