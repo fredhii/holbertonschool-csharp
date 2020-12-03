@@ -9,20 +9,12 @@ class Array
             Console.WriteLine("Size cannot be negative");
             return null;
         }
-        int[] array = new int[size];
-        for (int i = 0; i < size; i++)
-        {
-            Console.Write("{0}", i);
-            array[i] = i;
-            if (i != size - 1)
-            {
-                Console.Write(" ");
-            }
-            else
-            {
-                Console.WriteLine();
-            }
-        }
-        return array;
+		int[] numbers = new int[size];
+		for (int i = 0; i < size; i++)
+		{
+			numbers[i] = i;
+		}
+		Console.WriteLine("{0}", String.Join(" ", numbers));
+		return numbers;
     }
 }

@@ -10,16 +10,15 @@ class List
             Console.WriteLine("Size cannot be negative");
             return null;
         }
-        List<int> numbers = new List<int>();
-        for (int i = 0; i < size; i++)
-        {
-            Console.Write("{0}", i);
-            numbers.Add(i);
-            if (i != size - 1)
-                Console.Write(" ");
-            else
-                Console.WriteLine();
-        }
-        return numbers;
+        List<int> myList = new List<int>();
+		for (int i = 0; i < size; i++)
+		{
+			myList.Add(i);
+			Console.Write(i);
+			if (i < size - 1)
+				Console.Write(' ');
+		}
+		Console.WriteLine();
+		return myList;
     }
 }
