@@ -7,20 +7,26 @@ class MatrixMath
     ///<summary>Inverse of a matrix.</summary>
     public static double[,] Inverse2D(double[,] matrix)
     {
-        double[,] bad = new double[,] {{-1}};
-        double det;
-
-        if (matrix.GetLength(0) == 2 && matrix.GetLength(1) == 2)
+        if (matrix.GetLength(0) == 2 && matrix.GetLength(1) == 2 &&
+            (matrix[0, 0]*matrix[1, 1] - matrix[0, 1]*matrix[1, 0]) != 0)
         {
-            det = (matrix[0, 0] * matrix[1, 1]) - (matrix[0, 1] * matrix[1, 0]);
-            if (det == 0)
-                return (bad);
-            double[,] inverse = new double[,] {
-                {(1 / det) * matrix[1, 1], (1 / det) * -matrix[0, 1]},
-                {(1 / det) * -matrix[1, 0], (1 / det) * matrix[0, 0]}
+            double[,] inverseMat = new double[,] {
+                {matrix[1, 1], (-1)*matrix[0, 1]},
+                {(-1)*matrix[1, 0], matrix[0, 0]}
             };
-            return (inverse);
+            
+            // Determinant of Inverse Matrix => det(A^(-1)) = 1/det(A) 
+            double detInverMat = 1/(matrix[0, 0]*matrix[1, 1] - matrix[0, 1]*matrix[1, 0]);
+
+            for (int row = 0; row < matrix.GetLength(1); row++)
+            {
+                for (int col = 0; col < matrix.GetLength(0); col++)
+                {
+                    inverseMat[row, col] = Math.Round(detInverMat*inverseMat[row, col], 2);
+                }
+            }
+            return inverseMat;
         }
-        return (bad);
+        return new double[,] {{-1}};
     }
 }
