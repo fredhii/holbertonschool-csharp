@@ -7,34 +7,34 @@ class MatrixMath
     ///<summary>Rotate a matrix.</summary>
     public static double[,] Rotate2D(double[,] matrix, double angle)
     {
-        double[,] bad = new double[,] {{-1}};
-        double[,] rotate = new double[2, 2] {{Math.Cos(angle), Math.Sin(angle)},
-                                               {-1 * Math.Sin(angle), Math.Cos(angle)}};
-        double[,] matrix3 = new double[2, 2];
-        double temp;
+        double cos = Math.Cos(angle);
+        double sin = Math.Sin(angle);
+        double[,] rotateMatrix = new double[,] {
+            {cos, sin},
+            {-sin, cos}
+        };
 
-        if (matrix.GetLength(0) != 2 || matrix.GetLength(1) != 2)
+        if (matrix is double[,] && matrix.GetLength(0) == 2 && matrix.GetLength(1) == 2)
         {
-            return (bad);
-        }
-        for (int i = 0; i < 2; i++)
-        {
-            for (int j = 0; j < 2; j++)
+            int rowM1 = matrix.GetLength(0);
+            int colM1 = matrix.GetLength(1);
+            int colM2 = rotateMatrix.GetLength(1);
+            int rowM2 = rotateMatrix.GetLength(0);
+
+            double[,] mulMatrix = new double[rowM1, colM2];
+
+            for (int col = 0; col < colM1; col++)
             {
-                temp = 0;
-                for (int k = 0; k < 2; k++)
+                for (int row = 0; row < rowM1; row++)
                 {
-                    temp += Math.Round(matrix[i, k] * rotate[k, j], 2);
+                    for (int ixj = 0; ixj < colM2; ixj++)
+                    {
+                        mulMatrix[row, ixj] = Math.Round(mulMatrix[row, ixj] + matrix[row, col] * rotateMatrix[col, ixj], 2);
+                    }
                 }
-                matrix3[i, j] = temp;
             }
+            return mulMatrix;
         }
-        /*
-        matrix3[0, 0] = Math.Round(rotate[0, 0] * matrix[0, 0] + rotate[1, 0] * matrix[0, 1], 2);
-        matrix3[1, 0] = Math.Round(rotate[0, 0] * matrix[1, 0] + rotate[1, 0] * matrix[1, 1], 2);
-        matrix3[0, 1] = Math.Round(rotate[0, 1] * matrix[0, 0] + rotate[1, 1] * matrix[0, 1], 2);
-        matrix3[1, 1] = Math.Round(rotate[0, 1] * matrix[1, 0] + rotate[1, 1] * matrix[1, 1], 2);
-         */
-        return (matrix3);
+        else  { return new double[,]{{-1}}; }
     }
 }
